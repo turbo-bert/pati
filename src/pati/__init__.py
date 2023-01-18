@@ -1,3 +1,16 @@
+def mktable(data, hdr):
+    """Try rendering a table with tabulate if existing, or self.
+    """
+    import tabulate
+    return tabulate.tabulate(data, headers=hdr, tablefmt="grid")
+
+
+
+
+def pr():
+    input("Press RET to continue")
+
+
 def sps():
     print("\n"*10)
 
@@ -48,10 +61,15 @@ def list_multi(items, topic):
                 mi = "  [x] "
             print(s + mi + items[i])
         print()
-        x = input("(ret:move 0:move-top e:move-end c:confirm a:all n:none q:abort) ")
+        x = input("(SPC:toggle+move ret:move -:move-up 0:move-top e:move-end c|#:confirm a:all n:none q:abort) ")
 
         if x == "0":
             seli=0
+
+        if x == "-":
+            seli=seli-1
+            if seli < 0:
+                seli = len(items)-1
 
         if x == "e":
             seli=len(items)-1
